@@ -1,11 +1,15 @@
 package com.isai.demo_relaciones_jpa.models;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +32,8 @@ public class Club {
     @OneToOne(targetEntity = Entrenador.class, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_entrenador")
     private Entrenador entrenador;
+
+    @OneToMany(targetEntity = Jugador.class, fetch = FetchType.LAZY, mappedBy = "club")
+    private List<Jugador> jugadores;
 
 }
